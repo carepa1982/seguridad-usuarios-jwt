@@ -14,4 +14,6 @@ public interface UsuarioService {
 
 	void eliminar(Integer codigo);
 
+	Usuario findOne(String login);
+
 }

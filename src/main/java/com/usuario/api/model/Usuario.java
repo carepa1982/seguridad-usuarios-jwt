@@ -34,7 +34,7 @@ public class Usuario implements Serializable {
 
 	@NotEmpty
 	@Column(name = "NV_LOGIN", nullable = false)
-	private String login;
+	private String userName;
 
 	@NotEmpty
 	@Column(name = "NV_EMAIL", nullable = false)
@@ -64,12 +64,12 @@ public class Usuario implements Serializable {
 		this.segundoNombre = segundoNombre;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {

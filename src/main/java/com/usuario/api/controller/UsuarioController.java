@@ -25,7 +25,7 @@ import com.usuario.api.util.CustomErrorType;
 import com.usuario.api.util.CustomMessageType;
 import com.usuario.api.util.CustomResponseType;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class UsuarioController {
@@ -35,7 +35,7 @@ public class UsuarioController {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
-	@PostMapping("/usuario")
+	@PostMapping("/signup")
 	public ResponseEntity<CustomResponseType> guardarUsuario(@RequestBody String userJson)
 			throws JsonParseException, JsonMappingException, IOException {
 		Usuario usuario = objectMapper.readValue(userJson, Usuario.class);
@@ -74,7 +74,7 @@ public class UsuarioController {
 		if (StringUtils.trimToNull(usuario.getEmail()) == null) {
 			isValid = false;
 		}
-		if (StringUtils.trimToNull(usuario.getLogin()) == null) {
+		if (StringUtils.trimToNull(usuario.getUserName()) == null) {
 			isValid = false;
 		}
 		if (StringUtils.trimToNull(usuario.getPrimerNombre()) == null) {
