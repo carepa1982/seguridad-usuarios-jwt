@@ -39,14 +39,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
-                logger.error("an error occured during getting username from token", e);
+                logger.error("Se produjo un error al obtener el nombre de usuario de token", e);
             } catch (ExpiredJwtException e) {
-                logger.warn("the token is expired and not valid anymore", e);
+                logger.warn("El token está vencido y ya no es válido", e);
             } catch(SignatureException e){
-                logger.error("Authentication Failed. Username or Password not valid.");
+                logger.error("Autenticación fallida. Nombre de usuario o contraseña no válido.");
             }
         } else {
-            logger.warn("couldn't find bearer string, will ignore the header");
+            logger.warn("No pudo encontrar la cadena portadora, ignorará el encabezado");
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                logger.info("authenticated user " + username + ", setting security context");
+                logger.info("Usuario autenticado" + username + ", establecer el contexto de seguridad");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
